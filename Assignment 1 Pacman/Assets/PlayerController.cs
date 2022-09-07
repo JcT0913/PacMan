@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player Power Up");
             // isPowerUp = true;
+            ShowScore.instance.GetScore();
         }
 
         /*
