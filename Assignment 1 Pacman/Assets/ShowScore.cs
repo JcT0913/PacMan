@@ -42,6 +42,7 @@ public class ShowScore : MonoBehaviour
         if (highestScore < score)
         {
             PlayerPrefs.SetInt("highestScore", score);
+            // PlayerPrefs.DeleteKey("highestScore");
         }   
     }
 }
