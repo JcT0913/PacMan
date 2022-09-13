@@ -21,8 +21,7 @@ public class EnemyController : MonoBehaviour
         Ray ray = new Ray(transform.position, playerPosition.position - transform.position);
         Debug.DrawRay(transform.position, playerPosition.position - transform.position, Color.blue);
         RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        if (hit.collider.tag == "Player")
+        if (Physics.Raycast(ray, out hit))
         {
             enemyAgent.SetDestination(hit.transform.position);
         }
