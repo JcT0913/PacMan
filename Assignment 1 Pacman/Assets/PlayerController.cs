@@ -29,5 +29,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Enemy touch!");
         }
+
+        if (collision.gameObject.tag == "Powerup")
+        {
+            Debug.Log("Power Up!");
+        }
     }
 }
