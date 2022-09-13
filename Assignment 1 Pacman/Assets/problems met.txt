@@ -1,3 +1,0 @@
-1. cannot replace the material of game objects
-2. collision between enemy and player cannot be detected， or be detected too late
-3. cannot find NavMeshSurface component
