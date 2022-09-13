@@ -23,13 +23,14 @@ public class EnemyController : MonoBehaviour
         enemyAgent = GetComponent<NavMeshAgent>();
         finalIndex = wayPoints.Length;
         currentDestination = wayPoints[currentIndex].transform;
-        enemyAgent.SetDestination(currentDestination.position);
+        // enemyAgent.SetDestination(currentDestination.position);
         // Debug.Log(Vector3.Distance(wayPoints[2].transform.position, wayPoints[3].transform.position));
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         Debug.Log(currentIndex);
         if (enemyAgent.remainingDistance <= minDist)
         {
@@ -41,8 +42,33 @@ public class EnemyController : MonoBehaviour
             currentDestination = wayPoints[currentIndex].transform;
         }
         enemyAgent.SetDestination(currentDestination.position);
+        */
+
+        Ray ray = new Ray(transform.position, player.position - transform.position);
+        RaycastHit hit;
+        Debug.DrawLine(transform.position, player.position, Color.blue);
+        if (Physics.Raycast(ray, out hit) && hit.collider.tag == "Player")
+        {
+            currentDestination = hit.transform;
+        }
+        // using the knowledge about making enemies run along waypoints
+        // to avoid sometime error appears if only run after the player
+        else
+        {
+            if (Vector3.Distance(transform.position, wayPoints[currentIndex].transform.position) <= minDist)
+            {
+                currentIndex ++;
+                if (currentIndex >= finalIndex)
+                {
+                    currentIndex = 0;
+                }
+                currentDestination = wayPoints[currentIndex].transform;
+            }
+        }
+        enemyAgent.SetDestination(currentDestination.position);
     }
 
+    /*
     private void FixedUpdate()
     {
         Ray ray = new Ray(transform.position, player.position - transform.position);
@@ -56,4 +82,5 @@ public class EnemyController : MonoBehaviour
             currentDestination = wayPoints[currentIndex].transform;
         }
     }
+    */
 }
