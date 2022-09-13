@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5;
 
+    // change the skin width to min Value seems solved the problem of collision detect between player and enemy
     private CharacterController characterController;
 
     // Start is called before the first frame update
