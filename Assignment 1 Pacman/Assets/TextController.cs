@@ -12,6 +12,8 @@ public class TextController : MonoBehaviour
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI highestPointsText;
     public TextMeshProUGUI remainedLifeText;
+    public GameObject gameplayBackground;
+    public GameObject gameoverBackground;
 
     private int points = 0;
     private int highestPoints = 0;
@@ -25,12 +27,15 @@ public class TextController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameplayBackground.SetActive(true);
+        gameoverBackground.SetActive(false);
+
         highestPoints = PlayerPrefs.GetInt("highestPoints", 0);
         pointsText.text = points.ToString() + " Points";
         highestPointsText.text = "Highest Record: " + highestPoints.ToString() + " Points";
         remainedLifeText.text = "Remained Life: " + remainedLife;
 
-        // Time.timeScale = 1;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -40,7 +45,10 @@ public class TextController : MonoBehaviour
         {
             // freeze the scene
             // set timeScale to 1 will resume the scene
-            // Time.timeScale = 0;
+            Time.timeScale = 0;
+
+            gameplayBackground.SetActive(false);
+            gameoverBackground.SetActive(true);
         }
     }
 
@@ -76,5 +84,23 @@ public class TextController : MonoBehaviour
     {
         remainedLife -= 1;
         remainedLifeText.text = "Remained Life: " + remainedLife;
+    }
+
+    public void ReplayButton()
+    {
+        Debug.Log("Replay Button Pressed");
+        EditorSceneManager.LoadScene(1);
+    }
+
+    public void ClearRecordButton()
+    {
+        Debug.Log("Clear Record Button Pressed");
+        PlayerPrefs.SetInt("highestPoints", 0);
+    }
+
+    public void MainMenuButton()
+    {
+        Debug.Log("Main Menu Button Pressed");
+        EditorSceneManager.LoadScene(0);
     }
 }
