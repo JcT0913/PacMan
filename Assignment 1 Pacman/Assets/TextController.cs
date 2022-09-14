@@ -24,4 +24,9 @@ public class TextController : MonoBehaviour
     {
         
     }
+
+    public void AddOnePoint()
+    {
+        points += 1;
+    }
 }
