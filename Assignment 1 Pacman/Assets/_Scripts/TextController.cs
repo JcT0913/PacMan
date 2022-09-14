@@ -55,7 +55,7 @@ public class TextController : MonoBehaviour
 
         if (points >= 113)
         {
-            Time.timeScale = 1;
+            Time.timeScale = 0;
 
             gameplayBackground.SetActive(false);
             gamewinBackground.SetActive(true);
