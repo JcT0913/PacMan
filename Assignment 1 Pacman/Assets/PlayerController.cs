@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy" && !isPowerUp)
         {
             Debug.Log("Enemy touch!");
+            TextController.instance.LoseOneLife();
         }
 
         if (collision.gameObject.tag == "Powerup")
