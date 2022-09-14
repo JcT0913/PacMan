@@ -119,5 +119,6 @@ public class EnemyController : MonoBehaviour
     public void BeEaten()
     {
         gameObject.SetActive(false);
+        TextController.instance.AddFivePoint();
     }
 }

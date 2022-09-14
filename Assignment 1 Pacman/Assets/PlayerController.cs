@@ -43,6 +43,11 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(BePoweredUp());
         }
 
+        if (collision.gameObject.tag == "OnePoint")
+        {
+            TextController.instance.AddOnePoint();
+        }
+
         if (collision.gameObject.tag == "Enemy" & isPowerUp)
         {
             collision.gameObject.SendMessage("BeEaten");
