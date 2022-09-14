@@ -14,6 +14,7 @@ public class TextController : MonoBehaviour
     public TextMeshProUGUI remainedLifeText;
     public GameObject gameplayBackground;
     public GameObject gameoverBackground;
+    public GameObject gamewinBackground;
 
     private int points = 0;
     private int highestPoints = 0;
@@ -29,6 +30,7 @@ public class TextController : MonoBehaviour
     {
         gameplayBackground.SetActive(true);
         gameoverBackground.SetActive(false);
+        gamewinBackground.SetActive(false);
 
         highestPoints = PlayerPrefs.GetInt("highestPoints", 0);
         pointsText.text = points.ToString() + " Points";
@@ -49,6 +51,14 @@ public class TextController : MonoBehaviour
 
             gameplayBackground.SetActive(false);
             gameoverBackground.SetActive(true);
+        }
+
+        if (points >= 113)
+        {
+            Time.timeScale = 1;
+
+            gameplayBackground.SetActive(false);
+            gamewinBackground.SetActive(true);
         }
     }
 
