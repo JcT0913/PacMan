@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     // change the skin width to min Value seems solved the problem of collision detect between player and enemy
     private CharacterController characterController;
+    private bool isPowerUp = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" && !isPowerUp)
         {
             Debug.Log("Enemy touch!");
         }
@@ -33,6 +34,21 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Powerup")
         {
             Debug.Log("Power Up!");
+
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                g.SendMessage("BeFreezed");
+
+                float timer = 0;
+
+                while (timer <= 5)
+                {
+                    timer += Time.deltaTime;
+                    isPowerUp = true;
+                }
+
+                isPowerUp = false;
+            }
         }
     }
 }

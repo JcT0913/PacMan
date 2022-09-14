@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour
     private int finalIndex;
     private float minDist = 0.1f;
 
+    private float enemySpeed = 2.5f;
+
     // private bool pursuing = false;
     // private float pursuingTime = 0;
 
@@ -30,6 +32,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // enemyAgent.speed = 0;
+
         /*
         Debug.Log(currentIndex);
         if (enemyAgent.remainingDistance <= minDist)
@@ -83,4 +87,18 @@ public class EnemyController : MonoBehaviour
         }
     }
     */
+
+    public void BeFreezed()
+    {
+        /*
+        float timer = 0;
+
+        while (timer <= 5)
+        {
+            timer += Time.deltaTime;
+            enemyAgent.speed = 0;
+        }
+        */
+        enemyAgent.speed = 0;
+    }
 }
