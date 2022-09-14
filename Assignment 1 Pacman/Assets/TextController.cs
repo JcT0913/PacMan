@@ -33,7 +33,12 @@ public class TextController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (remainedLife <= 0)
+        {
+            // freeze the scene
+            // set timeScale to 1 will resume the scene
+            Time.timeScale = 0;
+        }
     }
 
     public void ClearHighestPoints()
