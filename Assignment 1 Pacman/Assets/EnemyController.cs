@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     private float minDist = 0.1f;
 
     private float enemySpeed = 2.5f;
+    private float freezeTime = 5f;
 
     // private bool pursuing = false;
     // private float pursuingTime = 0;
@@ -93,12 +94,30 @@ public class EnemyController : MonoBehaviour
         /*
         float timer = 0;
 
-        while (timer <= 5)
+        while (timer >= 5)
         {
             timer += Time.deltaTime;
+            Debug.Log(timer);
             enemyAgent.speed = 0;
         }
+
+        enemyAgent.speed = enemySpeed;
         */
+
+        StartCoroutine(FreezeItself());
+    }
+
+    IEnumerator FreezeItself()
+    {
         enemyAgent.speed = 0;
+
+        yield return new WaitForSeconds(freezeTime);
+
+        enemyAgent.speed = enemySpeed;
+    }
+
+    public void BeEaten()
+    {
+        gameObject.SetActive(false);
     }
 }

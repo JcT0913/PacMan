@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     private bool isPowerUp = false;
 
+    private float powerUpTime = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,22 +35,28 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Powerup")
         {
-            Debug.Log("Power Up!");
-
             foreach (GameObject g in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 g.SendMessage("BeFreezed");
-
-                float timer = 0;
-
-                while (timer <= 5)
-                {
-                    timer += Time.deltaTime;
-                    isPowerUp = true;
-                }
-
-                isPowerUp = false;
             }
+
+            StartCoroutine(BePoweredUp());
         }
+
+        if (collision.gameObject.tag == "Enemy" & isPowerUp)
+        {
+            collision.gameObject.SendMessage("BeEaten");
+        }
+    }
+
+    IEnumerator BePoweredUp()
+    {
+        isPowerUp = true;
+        Debug.Log("Power Up!");
+
+        yield return new WaitForSeconds(powerUpTime);
+
+        isPowerUp = false;
+        Debug.Log("Power Return!");
     }
 }
