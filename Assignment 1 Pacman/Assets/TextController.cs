@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.SceneManagement;
 
 public class TextController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class TextController : MonoBehaviour
         pointsText.text = points.ToString() + " Points";
         highestPointsText.text = "Highest Record: " + highestPoints.ToString() + " Points";
         remainedLifeText.text = "Remained Life: " + remainedLife;
+
+        // Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -37,12 +40,13 @@ public class TextController : MonoBehaviour
         {
             // freeze the scene
             // set timeScale to 1 will resume the scene
-            Time.timeScale = 0;
+            // Time.timeScale = 0;
         }
     }
 
     public void ClearHighestPoints()
     {
+        Debug.Log("Highest Points Record Reset");
         PlayerPrefs.SetInt("highestPoints", 0);
     }
 
