@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
 
     private float enemySpeed = 2.5f;
     private float freezeTime = 5f;
+    private Vector3 originalPos;
+    private float resetTime = 8f;
 
     // private bool pursuing = false;
     // private float pursuingTime = 0;
@@ -28,6 +30,8 @@ public class EnemyController : MonoBehaviour
         currentDestination = wayPoints[currentIndex].transform;
         // enemyAgent.SetDestination(currentDestination.position);
         // Debug.Log(Vector3.Distance(wayPoints[2].transform.position, wayPoints[3].transform.position));
+
+        originalPos = gameObject.transform.position;
     }
 
     // Update is called once per frame
@@ -120,5 +124,20 @@ public class EnemyController : MonoBehaviour
     {
         gameObject.SetActive(false);
         TextController.instance.AddFivePoint();
+
+        // StartCoroutine(EatenAndReset());
+    }
+
+    IEnumerator EatenAndReset()
+    {
+        // failed to make enemies reborn
+        gameObject.SetActive(false);
+        TextController.instance.AddFivePoint();
+
+        yield return new WaitForSeconds(resetTime);
+        Debug.Log("reset position");
+
+        gameObject.SetActive(true);
+        gameObject.transform.position = originalPos;
     }
 }

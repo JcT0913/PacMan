@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5;
+    public float speed = 3;
 
     // change the skin width to min Value seems solved the problem of collision detect between player and enemy
     private CharacterController characterController;
